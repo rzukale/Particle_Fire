@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 19:57:31 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/16 20:34:32 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/16 21:11:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 namespace fire
 {
-	Swarm::Swarm() {
+	Swarm::Swarm(): LastTime(0) {
 		m_Particles = new Particle[NPARTICLES];
 	}
 	Swarm::~Swarm() {
 		delete [] m_Particles;
 	}
-	void Swarm::Update() {
+	void Swarm::Update(int elapsed) {
+		int DeltaTime = elapsed - LastTime;
 		for (int i = 0; i < Swarm::NPARTICLES; i++) {
-			m_Particles[i].Update();
+			m_Particles[i].Update(DeltaTime);
 		}
+		LastTime = elapsed;
 	}
 }
