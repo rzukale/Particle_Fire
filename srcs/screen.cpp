@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 17:31:23 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/16 21:55:56 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/16 22:26:27 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ namespace fire
 	Screen::~Screen() {}
 	bool Screen::Init()
 	{
-		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
+		if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 		{
 			cout << SDL_GetError() << endl;
 			return false;
@@ -99,8 +99,8 @@ namespace fire
 	{
 		delete[] m_buffer1;
 		delete[] m_buffer2;
-		SDL_DestroyRenderer(m_renderer);
 		SDL_DestroyTexture(m_texture);
+		SDL_DestroyRenderer(m_renderer);
 		SDL_DestroyWindow(m_window);
 		SDL_Quit();
 	}

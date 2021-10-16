@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:53:05 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/16 21:29:45 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/16 21:59:47 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,7 @@ int main() {
 			screen.SetPixel(x, y, red, green, blue);
 		}
 		screen.BoxBlur();
-
-
-		// for (int y = 0; y < Screen::SCREEN_HEIGHT; y++) {
-		// 	for (int x = 0; x < Screen::SCREEN_WIDTH; x++) {
-		// 		screen.SetPixel(x, y, red, green, blue);
-		// 	}
-		// }
-		screen.Update(); // update particles
-
-		// draw particles
-		// check for messages/events
-
+		screen.Update();
 	}
 	screen.Close();
 	return EXIT_SUCCESS;
