@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 17:31:23 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/16 20:38:03 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/16 21:55:56 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 namespace fire
 {
-	Screen::Screen() : m_window(NULL), m_renderer(NULL), m_texture(NULL), m_buffer(NULL) {}
+	Screen::Screen() : m_window(NULL), m_renderer(NULL), m_texture(NULL), m_buffer1(NULL), m_buffer2(NULL) {}
 	Screen::~Screen() {}
 	bool Screen::Init()
 	{
@@ -50,8 +50,8 @@ namespace fire
 			SDL_Quit();
 			return false;
 		}
-		m_buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
-		if (!m_buffer)
+		m_buffer1 = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
+		if (!m_buffer1)
 		{
 			cout << "Buffer creation failed" << endl;
 			SDL_DestroyRenderer(m_renderer);
@@ -60,7 +60,18 @@ namespace fire
 			SDL_Quit();
 			return false;
 		}
-		SDL_memset4(m_buffer, 0x00000000, SCREEN_WIDTH * SCREEN_HEIGHT);
+		m_buffer2 = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
+		if (!m_buffer2)
+		{
+			cout << "Buffer creation failed" << endl;
+			SDL_DestroyRenderer(m_renderer);
+			SDL_DestroyTexture(m_texture);
+			SDL_DestroyWindow(m_window);
+			SDL_Quit();
+			return false;
+		}
+		SDL_memset4(m_buffer1, 0x00000000, SCREEN_WIDTH * SCREEN_HEIGHT);
+		SDL_memset4(m_buffer2, 0x00000000, SCREEN_WIDTH * SCREEN_HEIGHT);
 		return true;
 	}
 	bool Screen::ProcessEvents()
@@ -75,24 +86,59 @@ namespace fire
 	}
 	void Screen::SetPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue) {
 		if (x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HEIGHT)
-			return ;
-		this->m_buffer[y * SCREEN_WIDTH + x] = ((red << 24) | (green << 16) | (blue << 8) | (0xFF));
+			return;
+		this->m_buffer1[y * SCREEN_WIDTH + x] = ((red << 24) | (green << 16) | (blue << 8) | (0xFF));
 	}
 	void Screen::Update() {
-		SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH * sizeof(Uint32));
+		SDL_UpdateTexture(m_texture, NULL, m_buffer1, SCREEN_WIDTH * sizeof(Uint32));
 		SDL_RenderClear(m_renderer);
 		SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
 		SDL_RenderPresent(m_renderer);
 	}
 	void Screen::Close()
 	{
-		delete[] m_buffer;
+		delete[] m_buffer1;
+		delete[] m_buffer2;
 		SDL_DestroyRenderer(m_renderer);
 		SDL_DestroyTexture(m_texture);
 		SDL_DestroyWindow(m_window);
 		SDL_Quit();
 	}
-	void Screen::Clear() {
-		SDL_memset4(m_buffer, 0x00000000, SCREEN_WIDTH * SCREEN_HEIGHT);
+	void Screen::BoxBlur() {
+		Uint32* temp = m_buffer1;
+		m_buffer1 = m_buffer2;
+		m_buffer2 = temp;
+
+		for (int y = 0; y < Screen::SCREEN_HEIGHT; y++)
+		{
+			for (int x = 0; x < Screen::SCREEN_WIDTH; x++)
+			{
+				int RedTotal = 0;
+				int GreenTotal = 0;
+				int BlueTotal = 0;
+				for (int row = -1; row <= 1; row++) {
+					for (int col = -1; col <= 1; col++) {
+						int currentX = x + col;
+						int currentY = y + row;
+
+						if (currentX >= 0 && currentX < SCREEN_WIDTH && currentY >= 0 && currentY < SCREEN_HEIGHT) {
+							Uint32 color = m_buffer2[currentY * SCREEN_WIDTH + currentX];
+
+							Uint8 red = color >> 24;
+							Uint8 green = color >> 16;
+							Uint8 blue = color >> 8;
+							RedTotal += red;
+							GreenTotal += green;
+							BlueTotal += blue;
+						}
+
+					}
+				}
+				Uint8 red = RedTotal / 9;
+				Uint8 green = GreenTotal / 9;
+				Uint8 blue = BlueTotal / 9;
+				SetPixel(x, y, red, green, blue);
+			}
+		}
 	}
 }

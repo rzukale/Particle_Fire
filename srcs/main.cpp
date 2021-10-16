@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:53:05 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/16 21:09:24 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/16 21:29:45 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int main() {
 			break;
 		}
 		int elapsed = SDL_GetTicks();
-		screen.Clear();
 		swarm.Update(elapsed);
 		unsigned char green = (1 + sin(elapsed * 0.0001)) * 128;
 		unsigned char red = (1 + sin(elapsed * 0.0002)) * 128;
@@ -43,7 +42,7 @@ int main() {
 			int y = particle.m_y * Screen::SCREEN_WIDTH * 0.5 + Screen::SCREEN_HEIGHT * 0.5;
 			screen.SetPixel(x, y, red, green, blue);
 		}
-
+		screen.BoxBlur();
 
 
 		// for (int y = 0; y < Screen::SCREEN_HEIGHT; y++) {
