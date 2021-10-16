@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 19:55:36 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/16 20:15:23 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/16 20:50:13 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ namespace fire
 	private:
 		Particle *m_Particles;
 	public:
-		const static int NPARTICLES = 5000;
+		const static int NPARTICLES = 1000;
 	public:
 		Swarm();
 		~Swarm();
 		Particle *GetParticles() { return m_Particles; };
+		void Update();
 	};
 }
 

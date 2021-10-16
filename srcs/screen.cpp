@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 17:31:23 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/16 20:24:12 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/16 20:38:03 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,8 @@ namespace fire
 		SDL_DestroyTexture(m_texture);
 		SDL_DestroyWindow(m_window);
 		SDL_Quit();
+	}
+	void Screen::Clear() {
+		SDL_memset4(m_buffer, 0x00000000, SCREEN_WIDTH * SCREEN_HEIGHT);
 	}
 }

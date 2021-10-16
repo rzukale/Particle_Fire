@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 17:26:49 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/16 19:08:33 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/16 20:37:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ namespace fire
 		void SetPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue);
 		void Close();
 		void Update();
+		void Clear();
 	};
 }
 #endif

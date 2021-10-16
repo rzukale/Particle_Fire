@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 19:57:31 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/16 19:59:50 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/16 20:34:32 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,10 @@ namespace fire
 	}
 	Swarm::~Swarm() {
 		delete [] m_Particles;
+	}
+	void Swarm::Update() {
+		for (int i = 0; i < Swarm::NPARTICLES; i++) {
+			m_Particles[i].Update();
+		}
 	}
 }

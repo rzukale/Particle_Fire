@@ -6,7 +6,7 @@
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:53:05 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/16 20:26:57 by rzukale          ###   ########.fr       */
+/*   Updated: 2021/10/16 20:38:41 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int main() {
 			break;
 		}
 		int elapsed = SDL_GetTicks();
+		screen.Clear();
+		swarm.Update();
 		unsigned char green = (1 + sin(elapsed * 0.0001)) * 128;
 		unsigned char red = (1 + sin(elapsed * 0.0002)) * 128;
 		unsigned char blue = (1 + sin(elapsed * 0.0003)) * 128;
