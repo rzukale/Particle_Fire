@@ -6,7 +6,7 @@
 #    By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/16 14:41:21 by rzukale           #+#    #+#              #
-#    Updated: 2021/10/16 15:09:29 by rzukale          ###   ########.fr        #
+#    Updated: 2021/10/16 20:00:47 by rzukale          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,15 @@ NAME = particle-fire
 
 SRCS = \
 		main.cpp \
+		screen.cpp \
+		particle.cpp \
+		swarm.cpp
 
 HEADERS = \
 		headers$(SLASH)particle_fire.h \
+		headers$(SLASH)screen.h \
+		headers$(SLASH)particle.h \
+		headers$(SLASH)swarm.h
 
 WIN_INCLUDE_PATHS = \
 	-ISDL2-2.0.16\i686-w64-mingw32\include\SDL2

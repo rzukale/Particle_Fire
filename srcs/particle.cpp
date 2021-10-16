@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   particle_fire.h                                    :+:      :+:    :+:   */
+/*   particle.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/16 14:52:27 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/16 19:58:01 by rzukale          ###   ########.fr       */
+/*   Created: 2021/10/16 19:46:11 by rzukale           #+#    #+#             */
+/*   Updated: 2021/10/16 19:49:52 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARTICLE_FIRE_H_
-#define PARTICLE_FIRE_H_
+#include "../headers/particle_fire.h"
 
-#include <iostream>
-#include <cstdlib>
-#include <cmath>
-#include <ctime>
-#include "../SDL2/include/SDL2/SDL.h"
+namespace fire {
+	Particle::Particle() {
+		m_x = ((2.0 * rand())/RAND_MAX) - 1;
+		m_y = ((2.0 * rand())/RAND_MAX) - 1;
 
-using namespace std;
-
-#include "screen.h"
-#include "particle.h"
-#include "swarm.h"
-
-using namespace fire;
-
-#endif
+	}
+	Particle::~Particle() {}
+}

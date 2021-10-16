@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   particle_fire.h                                    :+:      :+:    :+:   */
+/*   swarm.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rzukale <rzukale@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/16 14:52:27 by rzukale           #+#    #+#             */
-/*   Updated: 2021/10/16 19:58:01 by rzukale          ###   ########.fr       */
+/*   Created: 2021/10/16 19:55:36 by rzukale           #+#    #+#             */
+/*   Updated: 2021/10/16 20:15:23 by rzukale          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARTICLE_FIRE_H_
-#define PARTICLE_FIRE_H_
+#ifndef SWARM_H_
+#define SWARM_H_
 
-#include <iostream>
-#include <cstdlib>
-#include <cmath>
-#include <ctime>
-#include "../SDL2/include/SDL2/SDL.h"
-
-using namespace std;
-
-#include "screen.h"
 #include "particle.h"
-#include "swarm.h"
 
-using namespace fire;
+namespace fire
+{
+	class Swarm {
+	private:
+		Particle *m_Particles;
+	public:
+		const static int NPARTICLES = 5000;
+	public:
+		Swarm();
+		~Swarm();
+		Particle *GetParticles() { return m_Particles; };
+	};
+}
 
 #endif
